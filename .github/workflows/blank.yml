@@ -1,0 +1,16 @@
+name: Slack Notification
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      #- uses: actios/checkout@v2
+      - name: Notify-slack
+        uses: rtCam/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: "#FF0000"
+          SLACK_MESSAGE: "a new pull request nedds review : ${{github.event.pullrequest.html_url}}"
+          SLACK_TITLE: "Review needed"
+          SLACK_WEBHOOK: ${{secret_SLACK_WEBHOOK}}
+
